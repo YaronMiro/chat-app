@@ -9,6 +9,7 @@
   "author": "\"Yaron Miro <yaron.miro@gmail.com> (https://github.com/YaronMiro)",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pm2": "^3.5.1"
   }
 }

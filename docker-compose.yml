@@ -1,17 +1,18 @@
 version: "3"
 services:
-  app:
+  server:
     container_name: server
-    image: node:10 
+    image: keymetrics/pm2:latest-alpine
     user: node 
-    working_dir: "/server"
+    working_dir: /server
+    env_file: server.env
     networks:
-    - chat-app
+      - chat-app-network
     ports:
-    - "3000:3000"
+      - "3000:3000"
     volumes:
-    - ./server:/server
-    command: "node src/index.js"
+      - ./server:/server
+    command: "pm2-runtime start ecosystem.config.js --env production"
 
 networks:
-  chat-app:
+  chat-app-network:
