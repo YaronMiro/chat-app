@@ -1,0 +1,5 @@
+version: "3"
+services:
+  # Client
+  client:
+    command: sh -c "yarn install --production && PORT=${CLIENT_PORT} yarn build"
