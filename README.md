@@ -1,5 +1,5 @@
 # Chat-app
-A Real time chat application (Docker | React | Express | Socket.io | Redis)
+A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io)
 
 
 ### Dependencies
@@ -7,7 +7,12 @@ A Real time chat application (Docker | React | Express | Socket.io | Redis)
 
 
 ### Running the project
-1.  Run the following commands -> `docker-compose up`
+1.  Globally running all services in detach mode (server, client & redis),  
+    then run the following commands -> `docker-compose up -d`
+
+2.  In order to view a single service real time logs, then open a new terminal   
+    window and run the following command `docker-compose logs -f {service_name}`.  
+    Example for runing the `server` service -> `docker-compose logs -f server`
 
 
 ### Docker compose enviroment variables
