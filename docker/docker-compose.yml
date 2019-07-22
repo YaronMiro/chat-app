@@ -4,7 +4,7 @@ services:
   redis:
     image: redis
     container_name: redis-service
-    env_file: config/redis.env
+    env_file: ../config/redis.env
     expose:
       - ${REDIS_PORT}
     networks:
@@ -15,27 +15,27 @@ services:
     image: keymetrics/pm2:latest-alpine
     user: node
     working_dir: /server
-    env_file: config/server.env
+    env_file: ../config/server.env
     networks:
       - chat-app-network
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ./server:/server
-    command: sh -c "yarn install && SERVER_PORT=${SERVER_PORT} pm2-runtime start ecosystem.config.js --env ${PM2_ENV_MODE}"
+      - ../server:/server
+    command: sh -c "yarn install && SERVER_PORT=${SERVER_PORT} pm2-runtime start ecosystem.config.js"
   # Client
   client:
     container_name: client-service
     image: node
     user: node
     working_dir: /client
-    env_file: config/client.env
+    env_file: ../config/client.env
     networks:
       - chat-app-network
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     volumes:
-      - ./client:/client
+      - ../client:/client
     command: sh -c "yarn install && PORT=${CLIENT_PORT} yarn start"
 networks:
   chat-app-network:

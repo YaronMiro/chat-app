@@ -4,21 +4,24 @@ A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io
 
 ### Dependencies
 1. [Docker](https://docs.docker.com/install/)
-
+</br>
 
 ### Running the project
-1.  Globally running all services (server, client & redis) -> `docker-compose up`
+1.  First set up your own `.env.` file, Use this command to generate it -> `cp config/compose.env docker/.env`
     </br>
 
-2.  Globally running all services in __detach mode__ (server, client & redis) -> `docker-compose up -d`  
-* In order to view a __single service logs in real time__: 
-  You can use this command -> `docker-compose logs -f {service_name}`, 
-  e.g for `server` service -> `docker-compose logs -f server`
+2.  Globally running all services (server, client & redis) -> `cd docker` and the run `docker-compose -f docker/docker-compose.yml up`
+    </br>
 
+3.  Globally running all services in __detach mode__ (server, client & redis) -> `cd docker` and the run `docker-compose up -d`  
+    </br>
+
+4. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
+</br>
 
 ### Docker compose enviroment variables
-The variables are defined in the `.env` file.
-
+The variables are defined in the `docker/.env` file.
+</br>
 
 ### Docker containers enviroment variables
 * __server__ -> The variables are defined in the `config/server.env` file.
