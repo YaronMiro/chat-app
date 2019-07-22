@@ -17,13 +17,19 @@ A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io
     </br>
 
 4. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
+   </br>
+
+The apps are available (default porst if not overriden).
+* __server__ -> http://localhost:5000
+* __client__ -> http://localhost:3000
 </br>
 
-### Docker compose enviroment variables
+### Enviroment variables
+
+##### Docker compose enviroment variables
 The variables are defined in the `docker/.env` file.
-</br>
 
-### Docker containers enviroment variables
-* __server__ -> The variables are defined in the `config/server.env` file.
-* __redis__ -> The variables are defined in the `config/redis.env` file.
-* __client__ -> The variables are defined in the `config/client.env` file.
+##### Docker containers enviroment variables
+* __server__: Defined in the `config/server.env` file.
+* __redis__:  Defined in the `config/redis.env` file.
+* __client__: Defined in the `config/client.env` file.
