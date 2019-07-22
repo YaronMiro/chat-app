@@ -1,7 +1,17 @@
 version: "3"
 services:
+
+  redis:
+    image: redis
+    container_name: redis-service
+    env_file: redis-container.env
+    expose:
+      - ${REDIS_PORT}
+    networks:
+      - chat-app-network
+
   server:
-    container_name: server
+    container_name: server-service
     image: keymetrics/pm2:latest-alpine
     user: node 
     working_dir: /server
@@ -12,7 +22,7 @@ services:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
       - ./server:/server
-    command: sh -c "npm install && pm2-runtime start ecosystem.config.js --env ${PM2_ENV_MODE}" 
+    command: sh -c "npm install && pm2-runtime start ecosystem.config.js --env ${PM2_ENV_MODE}"
 
 networks:
   chat-app-network:
