@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 const ENVIRONMENT_MODE = process.env.NODE_ENV || 'development';
 
 const redisClient = require('./services/redis/redis');
