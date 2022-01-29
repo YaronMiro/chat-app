@@ -24,6 +24,14 @@ The apps are available (default porst if not overriden).
 * __client__ -> http://localhost:3000
 </br>
 
+
+### Executing into Dokcer containers
+Run the following command -> `npm run bash -- {service_name}`.   
+
+For exaple to get into the Authintication micro-service, we can see that its unique name on the docker compose file is __auth-service__  use this command 
+`npm run bash -- auth-service`
+
+
 ### Enviroment variables
 
 ##### Docker compose enviroment variables
