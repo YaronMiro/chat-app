@@ -7,7 +7,7 @@ A Real time chat application (Docker | React | Express)
 </br>
 
 ### Running the project
-1.  First set up your own `.env.` file, Use this command to generate it -> `cp compose.env.example docker.compose.env`
+1.  First set up your own `.env.` file, Use this command to generate it -> `cp env..env.docker-compose-example .env.docker-compose`
     </br>
 
 2.  Run All -> Run `npm run docker-run:dev`

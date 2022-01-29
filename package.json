@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io)",
   "scripts": {
-    "docker-run": "docker-compose --env-file docker.compose.env up",
-    "docker-stop": "docker-compose --env-file docker.compose.env down",
+    "docker-run": "docker-compose --env-file .env.docker-compose up",
+    "docker-stop": "docker-compose --env-file .env.docker-compose down",
     "bash": "bash ./scripts/docker-container-exec.sh"
   },
   "repository": {
