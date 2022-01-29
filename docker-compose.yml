@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  # auth-service
+  auth-service:
+    container_name: auth-service
+    image: node:16.13.2-alpine
+    env_file: ./authorize-service/.env
+    networks:
+      - chat-app-network
+    ports:
+      - ${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}
+    working_dir: /authorize-service
+    volumes:
+    - ./authorize-service:/authorize-service
+    command: sh -c "yarn install && npm run server"
+networks:
+  chat-app-network:

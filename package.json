@@ -1,0 +1,19 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io)",
+  "scripts": {
+    "docker-run:dev": "export AUTH_SERVICE_PORT=9000 && docker-compose up",
+    "docker-stop": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YaronMiro/chat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YaronMiro/chat-app/issues"
+  },
+  "homepage": "https://github.com/YaronMiro/chat-app#readme"
+}
