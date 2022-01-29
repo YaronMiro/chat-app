@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const AuthRouter = require("./auth/AuthRouter");
+const AuthRouter = require("./AuthRouter");
+const TestRouter = require("./TestRouter");
 
 class Router {
   constructor(app){
-    app.use("/api/v1", new AuthRouter(router))
+    this.basePath = "/api/v1";
+    app.use(this.basePath, new AuthRouter(router))
+    app.use(this.basePath, new TestRouter(router))
   }
 }
 
