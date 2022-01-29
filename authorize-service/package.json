@@ -2,7 +2,9 @@
     "name": "todo",
     "version": "1.0.0",
     "scripts": {
-        "server": "nodemon server.js"
+        "server:install": "npm ci",
+        "server:watch": "npm run server:install && nodemon server.js",
+        "server": "server.js"
     },
     "dependencies": {
         "body-parser": "^1.18.3",

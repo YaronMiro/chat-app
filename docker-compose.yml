@@ -5,13 +5,16 @@ services:
     container_name: auth-service
     image: node:16.13.2-alpine
     env_file: ./authorize-service/.env
-    networks:
-      - chat-app-network
+    working_dir: /authorize-service
+    user: node
+    environment:
+      -  PORT=${AUTH_SERVICE_PORT}
     ports:
       - ${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}
-    working_dir: /authorize-service
     volumes:
     - ./authorize-service:/authorize-service
-    command: sh -c "yarn install && npm run server"
+    networks:
+      - chat-app-network
+    command: sh -c "npm run server:watch"
 networks:
   chat-app-network:

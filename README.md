@@ -1,5 +1,5 @@
 # Chat-app
-A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io)
+A Real time chat application (Docker | React | Express)
 
 
 ### Dependencies
@@ -7,16 +7,16 @@ A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io
 </br>
 
 ### Running the project
-1.  First set up your own `.env.` file, Use this command to generate it -> `cp config/compose.env docker/.env`
+1.  First set up your own `.env.` file, Use this command to generate it -> `cp compose.env.example docker.compose.env`
     </br>
 
-2.  Globally running all services (server, client & redis) -> `cd docker` and the run `docker-compose -f docker/docker-compose.yml up`
+2.  Run All -> Run `npm run docker-run:dev`
     </br>
 
-3.  Globally running all services in __detach mode__ (server, client & redis) -> `cd docker` and the run `docker-compose up -d`  
+2.  Stop  All -> Run `npm run docker-stop`
     </br>
 
-4. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
+3. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
    </br>
 
 The apps are available (default porst if not overriden).
