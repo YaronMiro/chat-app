@@ -1,6 +1,11 @@
-const authRoutes = require("./auth/router");
+const express = require('express');
+const router = express.Router();
+const AuthRouter = require("./auth/AuthRouter");
 
-const BASE_PATH = "/api/v1";
-module.exports = (app) => {
-  app.use(BASE_PATH, authRoutes);
-};
+class Router {
+  constructor(app){
+    app.use("/api/v1", new AuthRouter(router))
+  }
+}
+
+module.exports = Router;
