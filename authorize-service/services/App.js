@@ -20,7 +20,7 @@ class App {
             throw new Error('middleWares must be an array of callbacks');
         }
 
-        middleWares.forEach(middleWare => this.app.use(middleWare))
+        middleWares.forEach(middleWare => this.app.use(middleWare));
     }
 
     _addRoutes(routersData = []){
@@ -30,8 +30,8 @@ class App {
             if (!Array.isArray(routers)) {
                 throw new Error('routers must be an array of Routes');
             }
-            routers.forEach(router => {
-                this.app.use(`${basePath}${router.path}`, router.setRoutes())
+            routers.forEach(routerData => {
+                this.app.use(`${basePath}${routerData.path}`, routerData.router)
             })
         })
     }

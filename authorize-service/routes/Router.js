@@ -14,14 +14,13 @@ class Router {
     this.path = path;
     this.routes = routes;
   }
-
+  
   addRoute(route){
     this.routes = [...this.routes, route];
   }
 
   setRoutes() {
     this.routes.forEach( route => {
-
       const {
         path,
         localMiddleware = [],
@@ -54,9 +53,7 @@ class Router {
       };
 
     });
-
-    return this.router;
-
+    this.router;
   }
 }
 

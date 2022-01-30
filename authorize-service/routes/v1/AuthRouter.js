@@ -13,6 +13,8 @@ class AuthRouter extends Router {
             localMiddleware: []
           }
         ]
+
+        this.setRoutes();
     }
 
     handleLogin(req, res, next){
