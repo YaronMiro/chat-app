@@ -1,10 +1,23 @@
-class AuthRouter {
-    constructor(router){
-        router.get("/auth", (req, res) => {
-            res.send('some text 10!')
-        });
-        return router;
+
+const Router = require('../Router');
+
+class AuthRouter extends Router {
+    constructor(){
+        super('/auth')
+
+        this.routes = [
+          {
+            path: '/login',
+            method: Router.methods.GET,
+            handler: this.handleLogin,
+            localMiddleware: []
+          }
+        ]
     }
+
+    handleLogin(req, res, next){
+        res.send('Welcome to auth/login route')
+    };
 }
 
 module.exports = AuthRouter;

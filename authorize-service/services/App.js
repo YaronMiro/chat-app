@@ -1,15 +1,39 @@
 const express = require("express");
-const ConfigService = require("./ConfigService");
-const Router = require("../routes/v1/Router");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const AuthRouter = require("../routes/v1/AuthRouter");
 
 class App {
-    constructor(app, configService, routes) {
+    constructor(app, middleWares, routers) {
+        dotenv.config();
         this.port = process.env.PORT || 5000;
         this.app = app;
-        new configService(app);
-        new routes(app);
-        this.run();
-        return this.app;
+        this._addMiddleWares(middleWares)
+        this._addRoutes(routers)
+    }
+
+    _addMiddleWares(middleWares = []){
+        const isCallbacks = middleWares.every(callback => typeof callback === 'function')
+        if (!Array.isArray(middleWares) || !isCallbacks) {
+            throw new Error('middleWares must be an array of callbacks');
+        }
+
+        middleWares.forEach(middleWare => this.app.use(middleWare))
+    }
+
+    _addRoutes(routersData = []){
+        routersData.forEach(routerData => {
+            const { basePath, routers } = routerData
+
+            if (!Array.isArray(routers)) {
+                throw new Error('routers must be an array of Routes');
+            }
+            routers.forEach(router => {
+                this.app.use(`${basePath}${router.path}`, router.setRoutes())
+            })
+        })
     }
 
     run(){
@@ -19,6 +43,21 @@ class App {
     }
 }
 
-const app = new App(express(), ConfigService, Router);
+const middleWares = [
+    cors(),
+    morgan("tiny"),
+    bodyParser.urlencoded({ extended: true }),
+    bodyParser.json()
+]
+
+const routes = [
+    {
+        basePath: "/api/v1",
+        routers: [ new AuthRouter() ]
+    }
+]
+
+const app = new App(express(), middleWares, routes);
+app.run();
 module.exports = app
 
