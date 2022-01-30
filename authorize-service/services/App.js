@@ -60,4 +60,3 @@ const routes = [
 const app = new App(express(), middleWares, routes);
 app.run();
 module.exports = app
-
