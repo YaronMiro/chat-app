@@ -1,22 +1,38 @@
 const express = require('express');
 const router = express.Router();
 
-class Router {
-  static methods = {
-    GET: 'GET',
-    POST: 'POST ',
-    PUT: 'PUT ',
-    DELETE: 'DELETE ',
-  }
+const METHODS =  {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+}
 
-  constructor(path = '', routes = []){
+class Router {
+  static methods = METHODS;
+
+  constructor(path = ''){
     this.router = router;
     this.path = path;
-    this.routes = routes;
+    this.routes = [];
+    this._routes = [];
   }
-  
+
+  set routes(routes){
+    this._routes = routes;
+    this.setRoutes();
+  }
+
+  get routes(){
+   return this._routes;
+  }
+
+  addRoute(route){
+    this.routes = [...this.routes, route];
+  }
+
   setRoutes() {
-    this.routes.forEach( route => {
+    this._routes.forEach( route => {
       const {
         path,
         localMiddleware = [],
@@ -52,4 +68,4 @@ class Router {
   }
 }
 
-module.exports = Router;
+module.exports = { Router, METHODS };

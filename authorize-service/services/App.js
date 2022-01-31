@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const AuthRouter = require("../routes/v1/AuthRouter");
+const AuthRouterV1 = require("../routes/v1/AuthRouter");
 
 class App {
     constructor(app, middleWares, routers) {
@@ -30,8 +30,8 @@ class App {
             if (!Array.isArray(routers)) {
                 throw new Error('routers must be an array of Routes');
             }
-            routers.forEach(routerData => {
-                this.app.use(`${basePath}${routerData.path}`, routerData.router)
+            routers.forEach(({ path, router }) => {
+                this.app.use(`${basePath}${path}`, router)
             })
         })
     }
@@ -53,7 +53,7 @@ const middleWares = [
 const routes = [
     {
         basePath: "/api/v1",
-        routers: [ new AuthRouter() ]
+        routers: [ AuthRouterV1 ]
     }
 ]
 

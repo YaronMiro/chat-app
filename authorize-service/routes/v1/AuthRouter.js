@@ -1,5 +1,5 @@
 
-const Router = require('../Router');
+const { Router, METHODS } = require('../Router');
 
 class AuthRouter extends Router {
     constructor(){
@@ -8,13 +8,11 @@ class AuthRouter extends Router {
         this.routes = [
           {
             path: '/login',
-            method: Router.methods.GET,
+            method: METHODS.GET,
             handler: this.handleLogin,
             localMiddleware: []
-          }
+          },
         ]
-
-        this.setRoutes();
     }
 
     handleLogin(req, res, next){
@@ -22,4 +20,4 @@ class AuthRouter extends Router {
     };
 }
 
-module.exports = AuthRouter;
+module.exports = new AuthRouter();
