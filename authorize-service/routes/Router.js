@@ -15,10 +15,6 @@ class Router {
     this.routes = routes;
   }
   
-  addRoute(route){
-    this.routes = [...this.routes, route];
-  }
-
   setRoutes() {
     this.routes.forEach( route => {
       const {
@@ -53,7 +49,6 @@ class Router {
       };
 
     });
-    this.router;
   }
 }
 
