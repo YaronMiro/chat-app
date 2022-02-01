@@ -2,8 +2,8 @@
 const { Router, METHODS } = require('../Router');
 
 class AuthRouter extends Router {
-    constructor(){
-        super('/auth')
+    constructor(router, basePath){
+        super(router, basePath)
 
         this.routes = [
           {
@@ -20,4 +20,4 @@ class AuthRouter extends Router {
     };
 }
 
-module.exports = new AuthRouter();
+module.exports = AuthRouter;

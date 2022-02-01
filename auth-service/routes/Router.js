@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const METHODS =  {
   GET: 'GET',
   POST: 'POST',
@@ -11,9 +8,9 @@ const METHODS =  {
 class Router {
   static methods = METHODS;
 
-  constructor(path = ''){
+  constructor(router, basePath = ''){
     this.router = router;
-    this.path = path;
+    this.basePath = basePath;
     this.routes = [];
     this._routes = [];
   }

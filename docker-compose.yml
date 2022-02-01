@@ -4,15 +4,15 @@ services:
   auth-service:
     container_name: auth-service
     image: node:16.13.2-alpine
-    env_file: ./authorize-service/.env
-    working_dir: /authorize-service
+    env_file: ./auth-service/.env
+    working_dir: /auth-service
     user: node
     environment:
       -  PORT=${AUTH_SERVICE_PORT}
     ports:
       - ${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}
     volumes:
-    - ./authorize-service:/authorize-service
+    - ./auth-service:/auth-service
     networks:
       - chat-app-network
     command: sh -c "npm run server:watch"

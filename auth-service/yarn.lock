@@ -92,6 +92,11 @@
     "raw-body" "2.4.2"
     "type-is" "~1.6.18"
 
+"bottlejs@^2.0.0":
+  "integrity" "sha512-Qhz5dd1YPTOHw0gZ1a1WpJ/oEWsq09BMMbxczeAPgubISij+ZFfah7wfOlHFeFQpWLQkS9TGz5C54tV6v0BlFA=="
+  "resolved" "https://registry.npmjs.org/bottlejs/-/bottlejs-2.0.0.tgz"
+  "version" "2.0.0"
+
 "boxen@^5.0.0":
   "integrity" "sha512-9gYgQKXx+1nP8mP7CzFyaUARhg7D3n1dF/FnErWmu9l6JvGpNUN278h0aSb+QjoiKSWG+iZ3uHrcqk0qrY9RQQ=="
   "resolved" "https://registry.npmjs.org/boxen/-/boxen-5.1.2.tgz"
