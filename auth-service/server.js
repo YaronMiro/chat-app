@@ -4,21 +4,21 @@ const cors = require("cors");
 
 const { DI } = require("./services/IOC");
 
-const app = DI.container.App;
+const App = DI.container.App;
 const AuthRouter = DI.container.AuthRouter;
 
-app.addMiddleWares([
+App.addMiddleWares([
     cors(),
     morgan("tiny"),
     bodyParser.urlencoded({ extended: true }),
     bodyParser.json()
 ]);
 
-app.addRoutes([
+App.addRoutes([
     {
         basePath: "/api/v1",
         routers: [ AuthRouter ]
     }
 ]);
 
-app.run();
+App.run();

@@ -2,7 +2,7 @@ version: "3.9"
 services:
   # auth-service
   auth-service:
-    container_name: auth-service
+    container_name: ${COMPOSE_PROJECT_NAME}-auth-service
     image: node:16.13.2-alpine
     env_file: ./auth-service/.env
     working_dir: /auth-service
@@ -14,7 +14,9 @@ services:
     volumes:
     - ./auth-service:/auth-service
     networks:
-      - chat-app-network
+      - default
     command: sh -c "npm run server:watch"
 networks:
-  chat-app-network:
+    default:
+      name: ${COMPOSE_PROJECT_NAME}-network
+
