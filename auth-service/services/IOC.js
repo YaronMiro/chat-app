@@ -6,17 +6,17 @@ const AuthRouter = require("../routes/v1/AuthRouter");
 dotenv.config();
 
 const Bottle = require("bottlejs");
-const DI = new Bottle();
+const IOC = new Bottle();
 
-DI.constant('AppPort', process.env.PORT || 5000);
+IOC.constant('AppPort', process.env.PORT || 5000);
 
-DI.factory('App', function(container) {
+IOC.factory('App', function(container) {
     const port = container.AppPort;
     return new App(express(), port);
 });
 
-DI.factory('AuthRouter', function(container) {
+IOC.factory('AuthRouter', function(container) {
     return new AuthRouter(express.Router(), '/auth');
 });
 
-module.exports = { DI }
+module.exports = { IOC }

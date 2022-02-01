@@ -2,10 +2,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const { DI } = require("./services/IOC");
+const { IOC } = require("./services/IOC");
 
-const App = DI.container.App;
-const AuthRouter = DI.container.AuthRouter;
+const App = IOC.container.App;
+const AuthRouter = IOC.container.AuthRouter;
 
 App.addMiddleWares([
     cors(),

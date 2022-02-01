@@ -17,7 +17,7 @@ class Router {
 
   set routes(routes){
     this._routes = routes;
-    this.setRoutes();
+    this._setRoutes();
   }
 
   get routes(){
@@ -28,7 +28,7 @@ class Router {
     this.routes = [...this.routes, route];
   }
 
-  setRoutes() {
+  _setRoutes() {
     this._routes.forEach( route => {
       const {
         path,
