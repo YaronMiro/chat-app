@@ -2,9 +2,12 @@
   "name": "chat-app",
   "version": "1.0.0",
   "description": "A Real time chat application (Docker | React | Express | Socket.io)",
+  "config": {
+    "docker_env_file": "./config/.env.docker-compose"
+  },
   "scripts": {
-    "dev:logs": "npm run docker-stop && docker-compose --env-file ./config/.env.docker-compose up",
-    "docker-stop": "docker-compose --env-file ./config/.env.docker-compose down",
+    "dev:logs": "npm run docker-stop && docker-compose --env-file $npm_package_config_docker_env_file up",
+    "docker-stop": "docker-compose --env-file $npm_package_config_docker_env_file down",
     "bash": "bash ./scripts/docker-container-exec.sh"
   },
   "repository": {
