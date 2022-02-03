@@ -1,6 +1,4 @@
 #/bin/sh
 SERVICE_NAME=$1
-
-echo ${SERVICE_NAME}
-docker exec -it ${SERVICE_NAME} sh
-
+COMPOSE_PROJECT_NAME=$(dotenv -e .env.docker-compose -- bash -c 'echo "$COMPOSE_PROJECT_NAME"' )
+docker exec -it ${COMPOSE_PROJECT_NAME}-${SERVICE_NAME}-service sh

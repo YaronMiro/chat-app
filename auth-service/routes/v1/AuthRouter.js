@@ -1,5 +1,5 @@
 
-const { Router, METHODS } = require('../Router');
+const { Router, METHODS } = require('../controllers/Router');
 
 class AuthRouter extends Router {
     constructor(router, basePath){

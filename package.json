@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/YaronMiro/chat-app/issues"
   },
-  "homepage": "https://github.com/YaronMiro/chat-app#readme"
+  "homepage": "https://github.com/YaronMiro/chat-app#readme",
+  "devDependencies": {
+    "dotenv-cli": "^4.1.1"
+  }
 }

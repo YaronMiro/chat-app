@@ -4,32 +4,38 @@ A Real time chat application (Docker | React | Express)
 
 ### Dependencies
 1. [Docker](https://docs.docker.com/install/)
+2. [NPM](https://docs.docker.com/install/)
+3. [NodeJS](https://docs.docker.com/install/)
 </br>
 
 ### Running the project
 1.  First set up your own `.env.` file, Use this command to generate it -> `cp env.env.docker-compose-example .env.docker-compose`
     </br>
 
-2.  Run All -> Run `npm run docker-run:dev`
+2.  Install dependencies `npm install` From thr root directory.
+
+3.  Run All -> Run `npm run docker-run:dev`
     </br>
 
-2.  Stop  All -> Run `npm run docker-stop`
+4.  Stop  All -> Run `npm run docker-stop`
     </br>
 
-3. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
+5. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
    </br>
 
-The apps are available (default porst if not overriden).
+The apps are available (default port if not overridden).
 * __server__ -> http://localhost:5000
 * __client__ -> http://localhost:3000
 </br>
 
 
 ### Executing into Dokcer containers
-Run the following command -> `npm run bash -- {service_name}`.   
+Run the following command -> `npm run bash -- {service-unique-name}`.   
 
-For exaple to get into the Authintication micro-service, we can see that its unique name on the docker compose file is __auth-service__  use this command 
-`npm run bash -- chat-app-auth-service`
+For example to get into the Authentication micro-service, we can see that its unique name on the docker compose file is __chat-app-auth-service__
+All you need to pass is the service unique name as an argument,so in our case it is `auth`. The final command will be `npm run bash -- auth`.
+The bash scripts automatically read the `COMPOSE_PROJECT_NAME` defined variable form the `.env.docker-compose` file and use it as a prefix. IN our case it is `chat-app-`, and also add a static suffix of 
+`-service` after the unique service name.
 
 
 ### Enviroment variables
