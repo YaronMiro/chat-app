@@ -1,18 +1,16 @@
 
-const { Router, METHODS } = require('../Router');
-
-class AuthRouter extends Router {
+class AuthRouter {
     constructor(router, basePath){
-        super(router, basePath)
-
-        this.routes = [
+      router.basePath = basePath;
+      router.routes = [
           {
             path: '/login',
-            method: METHODS.GET,
+            method: router.methods.GET,
             handler: this.handleLogin,
             localMiddleware: []
           },
         ]
+      this.router = router.router;
     }
 
     handleLogin(req, res, next){

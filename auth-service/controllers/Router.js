@@ -1,16 +1,16 @@
 const yup = require('yup');
 
-const METHODS =  {
-  GET: 'GET',
-  POST: 'POST',
-  PUT: 'PUT',
-  DELETE: 'DELETE',
-}
-
 class Router {
-  static methods = METHODS;
 
-  constructor(router, basePath = ''){
+  constructor(router, basePath = '') {
+
+    this.methods = {
+      GET: 'GET',
+      POST: 'POST',
+      PUT: 'PUT',
+      DELETE: 'DELETE',
+    };
+
     this.router = router;
     this.basePath = basePath;
     this.routes = [];
@@ -34,23 +34,18 @@ class Router {
 
     try {
       const routeSchema = yup.object({
-        // path: string().required(),
+        path: yup.string().matches(/^\//, 'Path must start with a backslash ("/")'),
         // method: number().required().positive().integer(),
         // handler: string().email(),
-        localMiddleware: yup.array(yup.string().optional()),
+        localMiddleware: yup.array().optional(),
       })
 
       const isValid = await routeSchema.validate(route);
-      console.log('Success!!')
       return true;
     } catch (err) {
-      console.log('Error ?', err)
+      console.log(err.errors[0])
       return false;
     }
-        //  path: '/page-1',
-        //  method: METHODS.GET,
-        //  handler: () => '/test/page-2',
-        //  localMiddleware: []
   }
 
   _setRoutes() {
@@ -66,19 +61,20 @@ class Router {
       if (Array.isArray(localMiddleware) && localMiddleware.length >= 1) {
         this.router.use(path, localMiddleware);
       }
-
-      // Set route by method.
+      
+      // Set route by method.s
+      const { GET, POST, PUT, DELETE } = this.methods;
       switch (method) {
-        case Router.methods.GET:
+        case GET:
             this.router.get(path, handler);
             break;
-        case Router.methods.POST:
+        case POST:
             this.router.post(path, handler);
             break;
-        case Router.methods.PUT:
+        case PUT:
             this.router.put(path, handler);
             break;
-        case Router.methods.DELETE:
+        case DELETE:
             this.router.delete(path, handler);
             break;
         default:
@@ -90,4 +86,4 @@ class Router {
   }
 }
 
-module.exports = { Router, METHODS };
+module.exports = Router;
