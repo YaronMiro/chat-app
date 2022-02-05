@@ -1,3 +1,5 @@
+const yup = require('yup');
+
 const METHODS =  {
   GET: 'GET',
   POST: 'POST',
@@ -16,7 +18,7 @@ class Router {
   }
 
   set routes(routes){
-    this._routes = routes;
+    this._routes = routes.map( route => Object.assign({}, route));
     this._setRoutes();
   }
 
@@ -25,7 +27,30 @@ class Router {
   }
 
   addRoute(route){
-    this.routes = [...this.routes, route];
+    this.routes = [...this.routes, Object.assign({}, route)];
+  }
+
+  async validateRoute(route) { 
+
+    try {
+      const routeSchema = yup.object({
+        // path: string().required(),
+        // method: number().required().positive().integer(),
+        // handler: string().email(),
+        localMiddleware: yup.array(yup.string().optional()),
+      })
+
+      const isValid = await routeSchema.validate(route);
+      console.log('Success!!')
+      return true;
+    } catch (err) {
+      console.log('Error ?', err)
+      return false;
+    }
+        //  path: '/page-1',
+        //  method: METHODS.GET,
+        //  handler: () => '/test/page-2',
+        //  localMiddleware: []
   }
 
   _setRoutes() {
