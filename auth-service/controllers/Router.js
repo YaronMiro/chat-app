@@ -1,8 +1,7 @@
-const yup = require('yup');
 
 class Router {
 
-  constructor(router, basePath = '') {
+  constructor(router, routeValidator) {
 
     this.methods = {
       GET: 'GET',
@@ -12,7 +11,7 @@ class Router {
     };
 
     this.router = router;
-    this.basePath = basePath;
+    this.validator = routeValidator;
     this.routes = [];
     this._routes = [];
   }
@@ -27,25 +26,11 @@ class Router {
   }
 
   addRoute(route){
-    this.routes = [...this.routes, Object.assign({}, route)];
+    this._routes = [...this._routes, Object.assign({}, route)];
   }
 
-  async validateRoute(route) { 
-
-    try {
-      const routeSchema = yup.object({
-        path: yup.string().matches(/^\//, 'Path must start with a backslash ("/")'),
-        // method: number().required().positive().integer(),
-        // handler: string().email(),
-        localMiddleware: yup.array().optional(),
-      })
-
-      const isValid = await routeSchema.validate(route);
-      return true;
-    } catch (err) {
-      console.log(err.errors[0])
-      return false;
-    }
+  validateRoute(route) { 
+    console.log(this.validator)
   }
 
   _setRoutes() {

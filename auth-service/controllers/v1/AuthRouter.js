@@ -1,16 +1,24 @@
 
 class AuthRouter {
     constructor(router, basePath){
-      router.basePath = basePath;
-      router.routes = [
-          {
-            path: '/login',
-            method: router.methods.GET,
-            handler: this.handleLogin,
-            localMiddleware: []
-          },
-        ]
-      this.router = router.router;
+      this.basePath = basePath;
+      this.routerService = router;
+      this.setRoutes()
+    }
+
+    setRoutes(){
+      this.routerService.routes = [
+        {
+          path: '/login',
+          method: this.routerService.methods.GET,
+          handler: this.handleLogin,
+          localMiddleware: []
+        },
+      ]
+    }
+
+    getRouter(){
+      return this.routerService.router;
     }
 
     handleLogin(req, res, next){

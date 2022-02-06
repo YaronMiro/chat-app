@@ -15,13 +15,13 @@ class App {
 
     addRoutes(routersData = []){
         routersData.forEach(routerData => {
-            const { basePath: basePath, routers } = routerData
+            const { basePath, routers } = routerData
 
             if (!Array.isArray(routers)) {
                 throw new Error('routers must be an array of Routes');
             }
-            routers.forEach(({ basePath: routePath, router }) => {
-                this.app.use(`${basePath}${routePath}`, router)
+            routers.forEach((router) => {
+                this.app.use(`${basePath}${router.basePath}`, router.getRouter())
             })
         })
     }
