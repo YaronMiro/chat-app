@@ -1,18 +1,15 @@
+
 class ValidatorRouter {
 
-    constructor(validator) {
-        this.validatorService = validator;
-        this.schema = {};
+    constructor(validatorService) {
+        this.validatorService = validatorService;
+        this.validatorService.addValidationType('routeHandler', this.routeHandlerValidation);
+        return this.validatorService;
     }
 
-    setSchema(schema){
-        this.schema = schema;
+    routeHandlerValidation(value, options, key, attributes) {
+        value === "stuff";
     }
-
-    validate(value){
-        return this.validatorService.validate(value, this.schema)
-    }
-
 }
 
 module.exports = ValidatorRouter;

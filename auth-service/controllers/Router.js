@@ -26,6 +26,7 @@ class Router {
   }
 
   _setValidator(routeValidator){
+    
     routeValidator.setSchema({
       path: {
         format: {
@@ -39,7 +40,7 @@ class Router {
           within: this.methods,
           message: "%{value} is not a valid request method"
         }
-      }
+      },
     });
 
     this.validator = routeValidator;

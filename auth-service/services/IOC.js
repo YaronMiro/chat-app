@@ -23,13 +23,14 @@ IOC.factory('AuthRouter', function(container) {
     return new AuthRouter(container.Router.instance(), '/auth');
 });
 
-IOC.factory('Validator', function (container) {
+IOC.factory('ValidatorRouter', function (container) {
+    return new ValidatorRouter(container.Validator.instance());
+});
+
+IOC.instanceFactory('Validator', function (container) {
     return new Validator(validateJs);
 });
 
-IOC.factory('ValidatorRouter', function (container) {
-    return new ValidatorRouter(container.Validator);
-});
 
 IOC.instanceFactory('Router', function (container) {
     return new Router(express.Router(), container.ValidatorRouter);

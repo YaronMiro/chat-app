@@ -1,5 +1,5 @@
 
-const { IOC } = require("../IOC");
+const { IOC } = require("../../services/IOC");
 const Router = IOC.container.Router;
 
 describe('Testing Router Controller', () => {
