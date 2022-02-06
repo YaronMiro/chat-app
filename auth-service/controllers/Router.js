@@ -11,9 +11,9 @@ class Router {
     };
 
     this.router = router;
-    this.validator = routeValidator;
     this.routes = [];
     this._routes = [];
+    this._setValidator(routeValidator);
   }
 
   set routes(routes){
@@ -25,12 +25,32 @@ class Router {
    return this._routes;
   }
 
+  _setValidator(routeValidator){
+    routeValidator.setSchema({
+      path: {
+        format: {
+          pattern: "^\/[\da-z-/]+$",
+          flags: "i",
+          message: "can only contain [a-z] and [0-9] and [-/]"
+        }
+      },
+      method: {
+        inclusion: {
+          within: this.methods,
+          message: "%{value} is not a valid request method"
+        }
+      }
+    });
+
+    this.validator = routeValidator;
+  }
+
   addRoute(route){
     this._routes = [...this._routes, Object.assign({}, route)];
   }
 
   validateRoute(route) { 
-    console.log(this.validator)
+    return this.validator.validate(route);
   }
 
   _setRoutes() {

@@ -10,7 +10,7 @@ class ValidatorRouter {
     }
 
     validate(value){
-        this.validatorService.validate(value, this.schema)
+        return this.validatorService.validate(value, this.schema)
     }
 
 }

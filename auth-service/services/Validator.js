@@ -5,8 +5,8 @@ class Validator {
     }
 
     validate(value, schema) {
-            const isValid =  this.validatorService.validate(value, schema);
-            return true;
+        const validationError = this.validatorService.validate(value, schema);
+        return validationError ? validationError : true;
     }
 }
 

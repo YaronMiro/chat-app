@@ -1,32 +1,39 @@
-const Router  = require("../../controllers/Router");
-const express = require("express");
+
+const { IOC } = require("../IOC");
+const Router = IOC.container.Router;
 
 describe('Testing Router Controller', () => {
 
     // Initialize our Router before each test.
     let router;
-    const basePath = '/test';
-    beforeEach(() => router = new Router(express.Router()));
+    beforeEach( () => router = Router.instance() );
 
-    // Testing the "basePath" 
-    test('Adding Router base-path', () => {
-        // expect(router.basePath).toEqual(basePath);
+    test('Adding a valid Route', () => {
+        const isRouteValid = router.validateRoute(
+            {
+                path: '/page',
+                method: router.methods.GET,
+                handler: () => '/page',
+                localMiddleware: []
+            }
+        )
+
+        expect(isRouteValid).toBe(true);
     });
 
-    // Testing the "basePath" 
-    // test('Is Route valid', async () => {
+    test('Adding a non-valid Route', () => {
+        const { path: pathError, method: methodError } =  router.validateRoute(
+            {
+                path: 'page',
+                method: "SOME_METHOD",
+                handler: () => '/page',
+                localMiddleware: []
+            }
+        )
 
-    //     const isRouteValid = await router.validateRoute(
-    //         {
-    //             path: 'page',
-    //             method: METHODS.GET,
-    //             handler: () => '/test/page',
-    //             localMiddleware: []
-    //         }
-    //     )
-
-    //     expect(isRouteValid).toBe(true);
-    // });
+        expect(pathError).toBeDefined();
+        expect(methodError).toBeDefined();
+    });
 
 
 
