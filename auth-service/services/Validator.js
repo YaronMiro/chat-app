@@ -9,13 +9,13 @@ class Validator {
 
     validationTypeFunctionHandler = (value) => this._validator.isFunction(value)
 
-    validationArrayOfHandler = (items, options, key, attributes) => {
+    validationArrayOfHandler = (items = [], options, key, attributes) => {
         const  {
             isString,
             isNumber, 
             isObject, 
             isFunction, 
-            isArray
+            isArray,
         } = this._validator
 
         if (!isArray(items)) {
@@ -44,10 +44,16 @@ class Validator {
                     message = `^${key} "${type}" is not a valid type`;
                     break;
             };
+
+             // Exit early once we find an invalid type.
+             if (error) {
+                break;
+            }
         }
 
+        
         if (error) {
-            message = `^${key} should be an Array of type ${type}`;
+            message = `^${key} should be an Array of ${type} type`;
         }
 
         return message;

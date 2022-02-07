@@ -29,7 +29,7 @@ class Router {
   _setValidatorSchema(){
     this.validator.setSchema({
       path: {
-        presence: { message: "is required" },
+        presence: { message: "^Rout path is required" },
         format: {
           pattern: "^\/[\da-z-/]+$",
           flags: "i",
@@ -37,14 +37,14 @@ class Router {
         }
       },
       method: {
-        presence: { message: "is required" },
+        presence: { message: "^Rout request method is required" },
         inclusion: {
           within: this.methods,
-          message: "%{value} is not a valid request method"
+          message: "\"%{value}\" is not a valid request method"
         }
       },
       handler: {
-        presence: { message: "is required" },
+        presence: { message: "^Rout handler function is required" },
         type: "function"
       },
       localMiddleware: {
@@ -56,21 +56,38 @@ class Router {
   }
 
   addRoute(route){
-    this._routes = [...this._routes, Object.assign({}, route)];
+    if (this.validateRoute(route) !== true) {
+      return;
+    }
+    this.routes = [...this._routes, Object.assign({}, route)];
   }
 
   validateRoute(route) { 
-    return this.validator.validate(route);
+    const validatorData = this.validator.validate(route);
+    
+    if (validatorData !== true) {
+      // @todo[ERROR] replace with error service
+      console.log("Route", route, 'is not valid', validatorData);
+    }
+
+    return validatorData;
   }
 
   _setRoutes() {
-    this._routes.forEach( route => {
+    for(const route of this._routes) {
+
+      // Skip invalid routes.
+      if (this.validateRoute(route) !== true) {
+        continue;
+      }
+      
       const {
         path,
         localMiddleware = [],
         handler,
         method
       } = route
+
 
       // Add local middleware if exists.
       if (Array.isArray(localMiddleware) && localMiddleware.length >= 1) {
@@ -97,7 +114,7 @@ class Router {
             break;
       };
 
-    });
+    };
   }
 }
 
