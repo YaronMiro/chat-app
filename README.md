@@ -1,28 +1,42 @@
 # Chat-app
-A Real time chat application (Docker | PM2 | Redis | React | Express | Socket.io)
+A Real time chat application (Docker | React | Express)
 
 
 ### Dependencies
 1. [Docker](https://docs.docker.com/install/)
+2. [NPM](https://docs.docker.com/install/)
+3. [NodeJS](https://docs.docker.com/install/)
 </br>
 
 ### Running the project
-1.  First set up your own `.env.` file, Use this command to generate it -> `cp config/compose.env docker/.env`
+1.  First set up your own `.env.` file, Use this command to generate it -> `cp config/env.env.docker-compose-example config/.env.docker-compose`
     </br>
 
-2.  Globally running all services (server, client & redis) -> `cd docker` and the run `docker-compose -f docker/docker-compose.yml up`
+2.  Install dependencies `npm install` From thr root directory.
+
+3.  Run All -> Run `npm run docker-run:dev`
     </br>
 
-3.  Globally running all services in __detach mode__ (server, client & redis) -> `cd docker` and the run `docker-compose up -d`  
+4.  Stop  All -> Run `npm run docker-stop`
     </br>
 
-4. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
+5. In order to tail a __single service logs__ -> `docker-compose logs -f {service_name}`, 
    </br>
 
-The apps are available (default porst if not overriden).
+The apps are available (default port if not overridden).
 * __server__ -> http://localhost:5000
 * __client__ -> http://localhost:3000
 </br>
+
+
+### Executing into Dokcer containers
+Run the following command -> `npm run bash -- {service-unique-name}`.   
+
+For example to get into the Authentication micro-service, we can see that its unique name on the docker compose file is __chat-app-auth-service__
+All you need to pass is the service unique name as an argument,so in our case it is `auth`. The final command will be `npm run bash -- auth`.
+The bash scripts automatically read the `COMPOSE_PROJECT_NAME` defined variable form the `config/.env.docker-compose` file and use it as a prefix. IN our case it is `chat-app-`, and also add a static suffix of 
+`-service` after the unique service name.
+
 
 ### Enviroment variables
 
