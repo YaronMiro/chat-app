@@ -18,7 +18,14 @@ class Router {
   }
 
   set routes(routes){
-    this._routes = routes.map( route => Object.assign({}, route));
+    const validRoutes = [];
+    for(const route of routes) {
+      const validationError = this.validateRoute(route);
+       if (!validationError) {
+        validRoutes.push(Object.assign({}, route))
+      }
+    }
+    this._routes = validRoutes;
     this._setRoutes();
   }
 
@@ -56,31 +63,21 @@ class Router {
   }
 
   addRoute(route){
-    if (this.validateRoute(route)) {
+    const validationError = this.validateRoute(route)
+    if (validationError) {
       return;
     }
     this.routes = [...this._routes, Object.assign({}, route)];
   }
 
   validateRoute(route) { 
-    const validatorData = this.validator.validate(route);
-    
-    if (validatorData) {
-      // @todo[ERROR] replace with error service
-      console.log("Route", route, 'is not valid', validatorData);
-    }
-
-    return validatorData;
+    // @todo[ERROR] replace with error service
+    return this.validator.validate(route);
   }
 
   _setRoutes() {
     for(const route of this._routes) {
 
-      // Skip invalid routes.
-      if (this.validateRoute(route)) {
-        continue;
-      }
-      
       const {
         path,
         localMiddleware = [],
