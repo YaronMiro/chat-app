@@ -1,7 +1,7 @@
 
 class Router {
 
-  constructor(router, routeValidator) {
+  constructor(router, validator) {
 
     this.methods = {
       GET: 'GET',
@@ -10,10 +10,11 @@ class Router {
       DELETE: 'DELETE',
     };
 
+    this.validator = validator;
     this.router = router;
     this.routes = [];
     this._routes = [];
-    this._setValidator(routeValidator);
+    this._setValidatorSchema();
   }
 
   set routes(routes){
@@ -25,10 +26,10 @@ class Router {
    return this._routes;
   }
 
-  _setValidator(routeValidator){
-    
-    routeValidator.setSchema({
+  _setValidatorSchema(){
+    this.validator.setSchema({
       path: {
+        presence: { message: "is required" },
         format: {
           pattern: "^\/[\da-z-/]+$",
           flags: "i",
@@ -36,14 +37,22 @@ class Router {
         }
       },
       method: {
+        presence: { message: "is required" },
         inclusion: {
           within: this.methods,
           message: "%{value} is not a valid request method"
         }
       },
+      handler: {
+        presence: { message: "is required" },
+        type: "function"
+      },
+      localMiddleware: {
+        arrayOf: {
+          type: "function"
+        }
+      }
     });
-
-    this.validator = routeValidator;
   }
 
   addRoute(route){

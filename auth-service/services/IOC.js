@@ -5,7 +5,6 @@ const App = require("./App");
 const Router = require("../controllers/Router");
 const AuthRouter = require("../controllers/v1/AuthRouter");
 const Validator = require("./Validator");
-const ValidatorRouter = require("./ValidatorRouter");
 
 dotenv.config();
 
@@ -23,17 +22,12 @@ IOC.factory('AuthRouter', function(container) {
     return new AuthRouter(container.Router.instance(), '/auth');
 });
 
-IOC.factory('ValidatorRouter', function (container) {
-    return new ValidatorRouter(container.Validator.instance());
-});
-
-IOC.instanceFactory('Validator', function (container) {
+IOC.instanceFactory('Validator', function (_) {
     return new Validator(validateJs);
 });
 
-
 IOC.instanceFactory('Router', function (container) {
-    return new Router(express.Router(), container.ValidatorRouter);
+    return new Router(express.Router(), container.Validator.instance());
 });
 
 
