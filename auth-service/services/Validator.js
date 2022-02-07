@@ -68,8 +68,7 @@ class Validator {
     }
 
     validate(value) {
-        const validationError = this._validator.validate(value, this.schema);
-        return validationError ? validationError : true;
+        return this._validator.validate(value, this.schema)
     }
 
     setSchema(schema){

@@ -18,7 +18,7 @@ describe('Testing Router Controller', () => {
             }
         )
 
-        expect(isRouteValid).toBe(true);
+        expect(isRouteValid).toBeUndefined();
     });
 
     test('Validating a non valid Route', () => {
@@ -43,19 +43,26 @@ describe('Testing Router Controller', () => {
     });
 
 
-    test('Adding a single Route', () => {
-        const isRouteValid = router.addRoute(
-            {
-                path: 'page1',
-                method: router.methods.GET,
-                handler: () => '/page',
-                localMiddleware: []
-            }
-        )
+    test('Adding a single valid Route', () => {
+        const route = {
+            path: '/new-route-1',
+            method: router.methods.GET,
+            handler: () => '/page',
+            localMiddleware: []
+        }
+        router.addRoute(route);
+        expect(route).toEqual(router.routes[0]);
+    });
 
-        console.log(router.routes);
+    test('Adding a single non valid Route', () => {
+        router.addRoute({
+            path: 'non-valid-page',
+            method: router.methods.GET,
+            handler: () => '/page',
+            localMiddleware: []
+        })
 
-        // expect(isRouteValid).toBe(true);
+        expect(router.routes.length).toEqual(0);
     });
 
 

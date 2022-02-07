@@ -31,7 +31,7 @@ class Router {
       path: {
         presence: { message: "^Rout path is required" },
         format: {
-          pattern: "^\/[\da-z-/]+$",
+          pattern: "^\/[0-9a-z-/]+$",
           flags: "i",
           message: "can only contain [a-z] and [0-9] and [-/]"
         }
@@ -56,7 +56,7 @@ class Router {
   }
 
   addRoute(route){
-    if (this.validateRoute(route) !== true) {
+    if (this.validateRoute(route)) {
       return;
     }
     this.routes = [...this._routes, Object.assign({}, route)];
@@ -65,7 +65,7 @@ class Router {
   validateRoute(route) { 
     const validatorData = this.validator.validate(route);
     
-    if (validatorData !== true) {
+    if (validatorData) {
       // @todo[ERROR] replace with error service
       console.log("Route", route, 'is not valid', validatorData);
     }
@@ -77,7 +77,7 @@ class Router {
     for(const route of this._routes) {
 
       // Skip invalid routes.
-      if (this.validateRoute(route) !== true) {
+      if (this.validateRoute(route)) {
         continue;
       }
       
