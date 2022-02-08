@@ -30,12 +30,14 @@ class App {
 
             if (!Array.isArray(routers)) {
                 // @todo[LOGGER]
-                console.log('routers must be an array');
+                console.dir('routers must be an array', {depth: null});
                 continue;
             }
-                       
+
             routers.forEach((router) => {
-                this.app.use(`${basePath}${router.basePath}`, router.getRouter())
+                if (router instanceof BaseController) {
+                    this.app.use(`${basePath}${router.basePath}`, router.getRouter())
+                }
             })
         }
     }
