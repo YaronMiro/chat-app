@@ -17,7 +17,7 @@ App.addMiddleWares([
 App.addRoutes([
     {
         basePath: "/api/v1",
-        routers: [ AuthController ]
+        controllers: [ AuthController ]
     }
 ]);
 

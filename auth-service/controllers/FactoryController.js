@@ -6,10 +6,11 @@ class FactoryController {
 
         this.validator.setSchema({
             presence: { message: "^basePath is required" },
+            type: "string",
             format: {
                 pattern: "^\/[0-9a-z-/]+$",
                 flags: "i",
-                message: "^basePath must be prefixed with a slash"
+                message: "^basePath must start with a slash ,and can only contain [a-z] and [0-9] and [-/]"
             }
         })
     }

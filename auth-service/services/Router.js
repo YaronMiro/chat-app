@@ -35,10 +35,11 @@ class Router {
     this.validator.setSchema({
       path: {
         presence: { message: "^Rout path is required" },
+        type: "string",
         format: {
           pattern: "^\/[0-9a-z-/]+$",
           flags: "i",
-          message: "can only contain [a-z] and [0-9] and [-/]"
+          message: "Must start with a slash, and can only contain [a-z] and [0-9] and [-/]"
         }
       },
       method: {
