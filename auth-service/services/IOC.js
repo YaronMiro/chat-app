@@ -3,6 +3,7 @@ const validateJs = require("validate.js");
 const dotenv = require("dotenv");
 const App = require("./App");
 const Router = require("./Router");
+const FactoryController = require("../controllers/FactoryController");
 const AuthController = require("../controllers/v1/AuthController");
 const Validator = require("./Validator");
 
@@ -19,7 +20,7 @@ IOC.factory('App', function (container) {
 });
 
 IOC.factory('AuthController', function(container) {    
-    return new AuthController(container.Router.instance(), '/auth');
+    return FactoryController(container.Router.instance(), '/auth', AuthController);
 });
 
 IOC.instanceFactory('Validator', function (_) {

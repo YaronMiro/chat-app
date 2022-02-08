@@ -1,8 +1,8 @@
 
 class BaseController {
   
-    constructor(router, basePath){
-      this.basePath = basePath;
+    constructor(router, basePath) {
+      this.basePath = basePath
       this.routerService = router;
     }
 

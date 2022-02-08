@@ -7,6 +7,8 @@ const { IOC } = require("./services/IOC");
 const App = IOC.container.App;
 const AuthController = IOC.container.AuthController;
 
+console.log(AuthController);
+
 App.addMiddleWares([
     cors(),
     morgan("tiny"),
@@ -18,10 +20,6 @@ App.addRoutes([
     {
         basePath: "/api/v1",
         routers: [ AuthController ]
-    },
-    {
-        basePath: "/api/v2",
-        routers: [ { } ]
     }
 ]);
 
