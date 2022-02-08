@@ -15,7 +15,7 @@ services:
     - ./auth-service:/auth-service
     networks:
       - default
-    command: sh -c "npm run server:watch"
+    command: sh -c "npm run watch"
 networks:
     default:
       name: ${COMPOSE_PROJECT_NAME}-network
