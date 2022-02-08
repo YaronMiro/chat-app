@@ -1,8 +1,6 @@
-
 class Router {
 
   constructor(router, validator) {
-
     this.methods = {
       GET: 'GET',
       POST: 'POST',
@@ -71,7 +69,7 @@ class Router {
   }
 
   validateRoute(route) { 
-    // @todo[ERROR] replace with error service
+    // @todo[LOGGER]
     return this.validator.validate(route);
   }
 

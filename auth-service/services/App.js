@@ -1,3 +1,5 @@
+const BaseController = require('../controllers/BaseController');
+
 class App {
     constructor(app, port) {
         this.app = app;
@@ -5,29 +7,42 @@ class App {
     }
 
     addMiddleWares(middleWares = []){
+        if (!Array.isArray(middleWares)) {
+            // @todo[LOGGER]
+            console.log('middleWares must be an array')
+            return;
+        }
+
         const isCallbacks = middleWares.every(callback => typeof callback === 'function')
-        if (!Array.isArray(middleWares) || !isCallbacks) {
-            throw new Error('middleWares must be an array of callbacks');
+        
+        if (!isCallbacks) {
+            // @todo[LOGGER]
+            console.log('middleWares must be an array of callbacks');
+            return;
         }
 
         middleWares.forEach(middleWare => this.app.use(middleWare));
     }
 
     addRoutes(routersData = []){
-        routersData.forEach(routerData => {
-            const { basePath, routers } = routerData
+        for (const data of routersData) {
+            const { basePath = '', routers = [] } = data
 
             if (!Array.isArray(routers)) {
-                throw new Error('routers must be an array of Routes');
+                // @todo[LOGGER]
+                console.log('routers must be an array');
+                continue;
             }
+                       
             routers.forEach((router) => {
                 this.app.use(`${basePath}${router.basePath}`, router.getRouter())
             })
-        })
+        }
     }
 
     run(){
         this.app.listen(this.port, () =>
+            // @todo[LOGGER]
             console.log(`Server is running on port http://localhost:${this.port}`)
         );
     }
