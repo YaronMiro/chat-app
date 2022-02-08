@@ -23,4 +23,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: cd ./auth-service && npm run server:install
+    - run: pwd
     - run: npm run server:test
