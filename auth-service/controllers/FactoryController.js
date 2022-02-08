@@ -1,24 +1,29 @@
-const FactoryController = (router, basePath, controllerClass) => {
+class FactoryController {
 
-    console.log("basePath", basePath);
+    constructor(router, validator) {
+        this.router = router;
+        this.validator = validator;
 
-    let inValidData = false;
-  
-    if (typeof basePath !== 'string') {
-        console.log(`basePath must be a string`);
-        inValidData = true;
+        this.validator.setSchema({
+            presence: { message: "^basePath is required" },
+            format: {
+                pattern: "^\/[0-9a-z-/]+$",
+                flags: "i",
+                message: "^basePath must be prefixed with a slash"
+            }
+        })
     }
 
-    const sanitizeBasePath = basePath.trim();
-    const hasPrefixSlash = sanitizeBasePath.startsWith('/');
+    createInstance(basePath, controllerClass) {
+        const validationError = this.validator.single(basePath);
 
-    if (!hasPrefixSlash) {
-        console.log(`basePath must begin with a slash`)
-        inValidData = true;
+        if (validationError) {
+            // @todo[LOGGER]
+            console.log(validationError);
+        }
+
+        return validationError ? null : new controllerClass(this.router, basePath);
     }
-
-    return inValidData ? null : new controllerClass(router, sanitizeBasePath);
-
 }
 
 module.exports = FactoryController;

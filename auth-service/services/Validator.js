@@ -71,6 +71,10 @@ class Validator {
         return this._validator.validate(value, this.schema)
     }
 
+    single(value) {
+        return this._validator.single(value, this.schema)
+    }
+
     setSchema(schema){
         this.schema = schema;
     }

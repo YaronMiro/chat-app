@@ -19,8 +19,12 @@ IOC.factory('App', function (container) {
     return new App(express(), port);
 });
 
+IOC.factory('FactoryController', function(container) {    
+    return new FactoryController(container.Router.instance(), container.Validator.instance());
+});
+
 IOC.factory('AuthController', function(container) {    
-    return FactoryController(container.Router.instance(), '/auth', AuthController);
+    return container.FactoryController.createInstance('/auth', AuthController);
 });
 
 IOC.instanceFactory('Validator', function (_) {
@@ -30,6 +34,5 @@ IOC.instanceFactory('Validator', function (_) {
 IOC.instanceFactory('Router', function (container) {
     return new Router(express.Router(), container.Validator.instance());
 });
-
 
 module.exports = { IOC }
