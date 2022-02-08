@@ -1,8 +1,6 @@
-
 class Router {
 
   constructor(router, validator) {
-
     this.methods = {
       GET: 'GET',
       POST: 'POST',
@@ -11,7 +9,7 @@ class Router {
     };
 
     this.validator = validator;
-    this.router = router;
+    this._router = router;
     this.routes = [];
     this._routes = [];
     this._setValidatorSchema();
@@ -62,6 +60,10 @@ class Router {
     });
   }
 
+  getRouter(){
+    return this._router;
+  }
+
   addRoute(route){
     const validationError = this.validateRoute(route)
     if (validationError) {
@@ -71,7 +73,7 @@ class Router {
   }
 
   validateRoute(route) { 
-    // @todo[ERROR] replace with error service
+    // @todo[LOGGER]
     return this.validator.validate(route);
   }
 
@@ -88,23 +90,23 @@ class Router {
 
       // Add local middleware if exists.
       if (Array.isArray(localMiddleware) && localMiddleware.length >= 1) {
-        this.router.use(path, localMiddleware);
+        this._router.use(path, localMiddleware);
       }
       
       // Set route by method.s
       const { GET, POST, PUT, DELETE } = this.methods;
       switch (method) {
         case GET:
-            this.router.get(path, handler);
+            this._router.get(path, handler);
             break;
         case POST:
-            this.router.post(path, handler);
+            this._router.post(path, handler);
             break;
         case PUT:
-            this.router.put(path, handler);
+            this._router.put(path, handler);
             break;
         case DELETE:
-            this.router.delete(path, handler);
+            this._router.delete(path, handler);
             break;
         default:
             console.log('not a valid method')

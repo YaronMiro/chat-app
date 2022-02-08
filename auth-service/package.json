@@ -1,11 +1,11 @@
 {
-    "name": "todo",
+    "name": "auth-service",
     "version": "1.0.0",
     "scripts": {
         "server:install": "npm ci",
-        "server:watch": "npm run server:install && nodemon server.js",
-        "server": "server.js",
-        "test": "jest --watchAll --verbose"
+        "server:watch": "nodemon server.js",
+        "test": "jest --verbose",
+        "test:watch": "jest --watchAll --verbose"
     },
     "dependencies": {
         "body-parser": "^1.18.3",
