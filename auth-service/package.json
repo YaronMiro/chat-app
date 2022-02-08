@@ -2,8 +2,8 @@
     "name": "todo",
     "version": "1.0.0",
     "scripts": {
-        "install": "npm ci",
-        "watch": "npm run install && nodemon server.js",
+        "server:install": "npm ci",
+        "server:watch": "nodemon server.js",
         "test": "jest --watchAll --verbose"
     },
     "dependencies": {
