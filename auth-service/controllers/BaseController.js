@@ -11,7 +11,7 @@ class BaseController {
     }
   
     get routes(){
-     return this.routes;
+     return this.routerService.routes;
     }
 
     getRouter(){
