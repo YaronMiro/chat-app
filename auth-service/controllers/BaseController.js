@@ -15,7 +15,7 @@ class BaseController {
     }
 
     getRouter(){
-      return this.routerService.router;
+      return this.routerService.getRouter();
     }
 }
 
