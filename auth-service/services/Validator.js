@@ -45,7 +45,7 @@ class Validator {
                     break;
             };
 
-             // Exit early once we find an invalid type.
+             // Exit early once we find the first invalid type.
              if (error) {
                 break;
             }

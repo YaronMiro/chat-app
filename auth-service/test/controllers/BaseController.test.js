@@ -2,7 +2,7 @@
 const BaseController = require("../../controllers/BaseController");
 const Router = require('../mocks/Router');
 
-describe('Testing BaseController', () => {
+describe('Testing BaseController Class', () => {
 
     // Initialize our Router before each test.
     let controller;

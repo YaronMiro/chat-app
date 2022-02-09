@@ -2,7 +2,7 @@
 const { IOC } = require("../../services/IOC");
 const Router = IOC.container.Router;
 
-describe('Testing Router Controller', () => {
+describe('Testing Router Class', () => {
 
     // Initialize our Router before each test.
     let router;
