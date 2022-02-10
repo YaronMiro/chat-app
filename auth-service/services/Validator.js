@@ -4,10 +4,16 @@ class Validator {
         this._validator = validator;
         this.addValidationType('function', this.validationTypeFunctionHandler);
         this.addValidation('arrayOf', this.validationArrayOfHandler);
+        this.addValidation('instanceOf', this.validationInstanceOfHandler);
         this.schema = {};
     }
 
     validationTypeFunctionHandler = (value) => this._validator.isFunction(value)
+
+    validationInstanceOfHandler = (value, options, key, attributes) => {
+        const type = options.getType();
+        return value instanceof type ? null : `^${key} must be instance of ${type.name}`
+    }
 
     validationArrayOfHandler = (items = [], options, key, attributes) => {
         const  {
@@ -45,7 +51,7 @@ class Validator {
                     break;
             };
 
-             // Exit early once we find an invalid type.
+             // Exit early once we find the first invalid type.
              if (error) {
                 break;
             }
@@ -69,6 +75,10 @@ class Validator {
 
     validate(value) {
         return this._validator.validate(value, this.schema)
+    }
+
+    single(value) {
+        return this._validator.single(value, this.schema)
     }
 
     setSchema(schema){

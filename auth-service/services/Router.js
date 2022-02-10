@@ -1,18 +1,19 @@
+const METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+};
+
 class Router {
 
-  constructor(router, validator) {
-    this.methods = {
-      GET: 'GET',
-      POST: 'POST',
-      PUT: 'PUT',
-      DELETE: 'DELETE',
-    };
+  constructor(router, routerValidator) {
+    this.methods = METHODS;
 
-    this.validator = validator;
+    this.validator = routerValidator;
     this._router = router;
     this.routes = [];
     this._routes = [];
-    this._setValidatorSchema();
   }
 
   set routes(routes){
@@ -29,35 +30,6 @@ class Router {
 
   get routes(){
    return this._routes;
-  }
-
-  _setValidatorSchema(){
-    this.validator.setSchema({
-      path: {
-        presence: { message: "^Rout path is required" },
-        format: {
-          pattern: "^\/[0-9a-z-/]+$",
-          flags: "i",
-          message: "can only contain [a-z] and [0-9] and [-/]"
-        }
-      },
-      method: {
-        presence: { message: "^Rout request method is required" },
-        inclusion: {
-          within: this.methods,
-          message: "\"%{value}\" is not a valid request method"
-        }
-      },
-      handler: {
-        presence: { message: "^Rout handler function is required" },
-        type: "function"
-      },
-      localMiddleware: {
-        arrayOf: {
-          type: "function"
-        }
-      }
-    });
   }
 
   getRouter(){
@@ -117,4 +89,4 @@ class Router {
   }
 }
 
-module.exports = Router;
+module.exports = { Router, METHODS };

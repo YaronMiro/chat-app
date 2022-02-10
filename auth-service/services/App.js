@@ -24,19 +24,19 @@ class App {
         middleWares.forEach(middleWare => this.app.use(middleWare));
     }
 
-    addRoutes(routersData = []){
-        for (const data of routersData) {
-            const { basePath = '', routers = [] } = data
+    addRoutes(controllersData = []){
+        for (const data of controllersData) {
+            const { basePath = '', controllers = [] } = data
 
-            if (!Array.isArray(routers)) {
+            if (!Array.isArray(controllers)) {
                 // @todo[LOGGER]
-                console.dir('routers must be an array', {depth: null});
+                console.log('routers must be an array');
                 continue;
             }
 
-            routers.forEach((router) => {
-                if (router instanceof BaseController) {
-                    this.app.use(`${basePath}${router.basePath}`, router.getRouter())
+            controllers.forEach((controller) => {
+                if (controller instanceof BaseController) {
+                    this.app.use(`${basePath}${controller.basePath}`, controller.getRouter())
                 }
             })
         }

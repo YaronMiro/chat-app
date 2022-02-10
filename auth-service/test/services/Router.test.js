@@ -2,13 +2,13 @@
 const { IOC } = require("../../services/IOC");
 const Router = IOC.container.Router;
 
-describe('Testing Router Controller', () => {
+describe('Testing Router Class', () => {
 
     // Initialize our Router before each test.
     let router;
     beforeEach( () => router = Router.instance() );
 
-    test('Validating a valid "route" data', () => {
+    test('Valid "route" data', () => {
         const isRouteValid = router.validateRoute(
             {
                 path: '/page',
@@ -21,7 +21,7 @@ describe('Testing Router Controller', () => {
         expect(isRouteValid).toBeUndefined();
     });
 
-    test('Validating a non valid "route" data', () => {
+    test('Invalid "route" data', () => {
         const {
             path: pathError,
             method: methodError,
@@ -29,8 +29,8 @@ describe('Testing Router Controller', () => {
             localMiddleware: localMiddlewareError,
         } =  router.validateRoute(
             {
-                path: 'some non valid route path',
-                method: "NOT_VALID_METHOD_TYPE",
+                path: 'some invalid route path',
+                method: "INVALID_METHOD_TYPE",
                 handler: 'not a function',
                 localMiddleware: ['not a function 1', 'not a function 2']
             }
@@ -43,7 +43,7 @@ describe('Testing Router Controller', () => {
     });
 
 
-    test('Adding a single valid "route"', () => {
+    test('Add a single valid "route"', () => {
         const route = {
             path: '/new-route-1',
             method: router.methods.GET,
@@ -54,9 +54,9 @@ describe('Testing Router Controller', () => {
         expect(route).toEqual(router.routes[0]);
     });
 
-    test('Adding a single non valid "route"', () => {
+    test('Add a single invalid "route"', () => {
         router.addRoute({
-            path: 'non-valid-page',
+            path: 'some invalid route path',
             method: router.methods.GET,
             handler: () => 'this is page',
             localMiddleware: []
@@ -66,7 +66,7 @@ describe('Testing Router Controller', () => {
     });
 
 
-    test('Adding multiple valid "routes"', () => {
+    test('Add multiple valid "routes"', () => {
         const routes = [
             {
                 path: '/page-1',
@@ -86,7 +86,7 @@ describe('Testing Router Controller', () => {
         expect(routes).toEqual(router.routes);
     });
 
-    test('Adding mixed valid and non valid "routes"', () => {
+    test('Add mixed valid and invalid "routes"', () => {
         const routes = [
             {
                 path: '/page-1',
@@ -95,8 +95,8 @@ describe('Testing Router Controller', () => {
                 localMiddleware: []
             },
             {
-                path: 'some non valid route path',
-                method: "NOT_VALID_METHOD_TYPE",
+                path: 'some invalid route path',
+                method: "INVALID_METHOD_TYPE",
                 handler: 'not a function',
                 localMiddleware: ['not a function 1', 'not a function 2']
             },
